@@ -1,0 +1,184 @@
+{
+  "checkedAt": "2026-11-13T03:20:42.795Z",
+  "url": "https://tasklane-agent.vercel.app",
+  "liveRequested": true,
+  "passed": true,
+  "checks": [
+    {
+      "name": "pages, session and no-store boundary",
+      "passed": true,
+      "detail": {
+        "aiConfigured": true
+      }
+    },
+    {
+      "name": "practice plan, pause, refresh and resume",
+      "passed": true
+    },
+    {
+      "name": "read-only execution and approval gate",
+      "passed": true,
+      "detail": {
+        "traceEvents": [
+          "started",
+          "plan_ready",
+          "paused",
+          "resumed",
+          "tool_started",
+          "paused",
+          "resumed",
+          "tool_completed",
+          "tool_started",
+          "tool_completed",
+          "tool_started",
+          "approval_requested",
+          "human_approved",
+          "tool_completed",
+          "completed"
+        ],
+        "toolResults": [
+          {
+            "tool": "searchKnowledge",
+            "result": "[quality-2] Release quality gate: Before launch, complete a keyboard-only journey, visible focus checks, form error checks, and loading and empty states. High-priority defects must be fixed or the release is blocked. The project lead records the final approval.\n[brief-2] Release decision: The target launch date is 24 November 2026. This is a target, not a confirmed commitment. The project lead approves the launch only after mobile review and the release quality checklist pass. An unresolved high-priority defect blocks release."
+          },
+          {
+            "tool": "searchTasks",
+            "result": "tsk-research: Customer interview synthesis — todo, medium\ntsk-onboarding: Map the onboarding flow — todo, high\ntsk-email: Draft launch announcement — todo, low\ntsk-checkout: Build checkout prototype — doing, high\ntsk-mobile: Review mobile layouts — doing, medium\ntsk-tokens: Publish design tokens — done, low"
+          },
+          {
+            "tool": "createTask",
+            "result": "Approved change committed to your isolated project board. The board offers Undo for the latest change."
+          }
+        ]
+      }
+    },
+    {
+      "name": "cancel invalidates pending proposal",
+      "passed": true
+    },
+    {
+      "name": "revision invalidates approval and clarification can be answered",
+      "passed": true
+    },
+    {
+      "name": "failure stays safe and retry can complete",
+      "passed": true
+    },
+    {
+      "name": "strict input, session isolation, consent and stale checkpoints",
+      "passed": true
+    },
+    {
+      "name": "real AI plan reaches approval and completes after human decision",
+      "passed": true,
+      "detail": {
+        "planned": [
+          {
+            "title": "List all current tasks",
+            "tool": {
+              "toolName": "searchTasks",
+              "input": {
+                "query": "",
+                "status": "all",
+                "priority": "all"
+              }
+            }
+          },
+          {
+            "title": "Create launch readiness checklist task",
+            "tool": {
+              "toolName": "createTask",
+              "input": {
+                "title": "Launch readiness checklist",
+                "description": "Checklist of items needed before launch approval",
+                "priority": "medium",
+                "tag": "research"
+              }
+            }
+          }
+        ],
+        "trace": [
+          {
+            "seq": 1,
+            "at": 1794540037320,
+            "event": "started",
+            "detail": "AI planning requested. No board changes authorized.",
+            "step": null,
+            "durationMs": 0
+          },
+          {
+            "seq": 2,
+            "at": 1794540039608,
+            "event": "plan_ready",
+            "detail": "2 steps ready. Each write will need approval.",
+            "step": 0,
+            "durationMs": 0
+          },
+          {
+            "seq": 3,
+            "at": 1794540039866,
+            "event": "tool_started",
+            "detail": "searchTasks: Gather overview of existing tasks to assess launch readiness",
+            "step": 0,
+            "durationMs": 0
+          },
+          {
+            "seq": 4,
+            "at": 1794540040168,
+            "event": "tool_completed",
+            "detail": "searchTasks: tsk-research: Customer interview synthesis — todo, medium\ntsk-onboarding: Map the onboarding flow — todo, high\ntsk-email: Draft launch announcement — todo, low\ntsk-checkout: Build checkou",
+            "step": 0,
+            "durationMs": 0
+          },
+          {
+            "seq": 5,
+            "at": 1794540040533,
+            "event": "tool_started",
+            "detail": "createTask: Add a checklist task for approval of launch readiness",
+            "step": 1,
+            "durationMs": 0
+          },
+          {
+            "seq": 6,
+            "at": 1794540040798,
+            "event": "approval_requested",
+            "detail": "createTask validated. Waiting for explicit approval; no change made.",
+            "step": 1,
+            "durationMs": 0
+          },
+          {
+            "seq": 7,
+            "at": 1794540041059,
+            "event": "human_approved",
+            "detail": "The user approved this exact proposal.",
+            "step": 1,
+            "durationMs": 0
+          },
+          {
+            "seq": 8,
+            "at": 1794540041059,
+            "event": "tool_completed",
+            "detail": "createTask: Approved change committed to your isolated project board. The board offers Undo for the latest change.",
+            "step": 1,
+            "durationMs": 0
+          },
+          {
+            "seq": 9,
+            "at": 1794540041059,
+            "event": "completed",
+            "detail": "All planned steps completed. Review the tool results and board.",
+            "step": null,
+            "durationMs": 0
+          }
+        ]
+      }
+    },
+    {
+      "name": "real AI unsupported request asks clarification without tools",
+      "passed": true,
+      "detail": {
+        "clarification": "Would you like me to create a task for drafting and sending the launch email to the customer?"
+      }
+    }
+  ]
+}

@@ -2,6 +2,8 @@
 
 - Repository: https://github.com/PenielOkoli/tasklane-agent
 - Live URL: https://tasklane-agent.vercel.app/
-- Status: local implementation and automated checks passed; deployment verified.
+- Verified application commit: `01ee49b143dedb44bb5f25c017bab5e91329c8c7`
 
-Includes supervised agent workflow, approval controls, pause/resume/cancel and revised instructions, inspectable tool results, clarification and failed states, and an exportable activity log. See assessment.md and verification.md for evidence and limits.
+The Agent workspace shows the plan, tool results, approval controls and exportable activity log. On the live site, allow Groq to process the sample instructions and select **Plan with AI**. Pause, reload and resume the run. Review the proposed task and approve it to see completion and the recorded decision. Use the labeled practice runs to explore clarification and failure recovery.
+
+[Assessment mapping](assessment.md) · [Verification](verification.md) · [Live evidence](live-verification.json)

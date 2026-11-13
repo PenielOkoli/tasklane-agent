@@ -6,6 +6,7 @@ Tasklane continues as a supervised project assistant: an AI-generated plan, insp
 
 - Repository: https://github.com/PenielOkoli/tasklane-agent
 - Live deployment: https://tasklane-agent.vercel.app/
+- [Submission and reviewer walkthrough](docs/modules/07/submission.md)
 - [Assessment mapping](docs/modules/07/assessment.md)
 - [Plan and architecture](docs/modules/07/plan.md)
 - [Verification and limitations](docs/modules/07/verification.md)
