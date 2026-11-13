@@ -74,6 +74,13 @@ export async function POST(request: Request) {
     run.version++;
     return reply(session, run);
   } catch (error) {
+    if (!(error instanceof ActionError)) {
+      const providerStatus = (error as { statusCode?: number } | null)?.statusCode;
+      console.warn('Agent request failed', {
+        name: error instanceof Error ? error.name : 'UnknownError',
+        ...(typeof providerStatus === 'number' ? { providerStatus } : {}),
+      });
+    }
     const message = error instanceof ActionError ? error.message : 'AI planning or tool validation failed. No change was committed by this request. Retry or revise the instructions.';
     if (advancing && run) { failRun(run, message); run.version++; }
     try { return reply(session, run, message, error instanceof ActionError ? error.status : 502); }

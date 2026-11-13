@@ -3,10 +3,28 @@ import assert from 'node:assert/strict';
 import { freshSession } from '../src/lib/seed';
 import { acceptPlan, approveStep, assertVersion, controlRun, executeStep, failRun, newRun, practicePlan, prepareStep, trace } from '../src/lib/run-engine';
 import { decodeRun, encodeRun } from '../src/lib/run-session';
+import { decodePlannerResponse } from '../src/lib/run-contracts';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { AgentDesk } from '../src/components/agent-desk';
 const setup = () => { const session = freshSession(); return { session, run: newRun(session, 'Review launch readiness', 'demo') }; };
 const read = () => 'Sample release gates: accessibility and error states.';
+test('provider response preserves an empty search query and rejects invalid tool arguments', () => {
+  const step = {
+    title: 'List tasks',
+    purpose: 'Find work on the board',
+    toolName: 'searchTasks' as const,
+    arguments: { query: '', status: 'all', priority: 'all', title: '', description: '', tag: '', taskId: '' },
+  };
+  const response = { summary: 'List current tasks', clarification: '', steps: [step] };
+  assert.deepEqual(decodePlannerResponse(response).steps[0].tool, {
+    toolName: 'searchTasks',
+    input: { query: '', status: 'all', priority: 'all' },
+  });
+  assert.throws(() => decodePlannerResponse({
+    ...response,
+    steps: [{ ...step, arguments: { ...step.arguments, title: 'Unexpected input' } }],
+  }));
+});
 const reachApproval = () => {
   const pair = setup(); acceptPlan(pair.run, pair.session, practicePlan(pair.run));
   for (let i = 0; i < 3; i++) { prepareStep(pair.run); executeStep(pair.run, pair.session, read); }

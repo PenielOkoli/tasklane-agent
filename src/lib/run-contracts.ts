@@ -13,6 +13,44 @@ export const planSchema = z.object({
   steps: z.array(z.object({ title: short(80), purpose: short(160), tool: runToolSchema }).strict()).max(4),
 }).strict();
 export type Plan = z.infer<typeof planSchema>;
+
+// Keep the provider schema flat. The execution schema below this boundary
+// still checks the exact input shape and allowed values for each tool.
+export const plannerResponseSchema = z.object({
+  summary: z.string(),
+  clarification: z.string(),
+  steps: z.array(z.object({
+    title: z.string(),
+    purpose: z.string(),
+    toolName: z.enum(['searchTasks', 'searchKnowledge', 'createTask', 'setPriority', 'moveTask', 'archiveTask']),
+    arguments: z.object({
+      query: z.string(),
+      status: z.string(),
+      priority: z.string(),
+      title: z.string(),
+      description: z.string(),
+      tag: z.string(),
+      taskId: z.string(),
+    }).strict(),
+  }).strict()),
+}).strict();
+
+export function decodePlannerResponse(response: z.infer<typeof plannerResponseSchema>): Plan {
+  return planSchema.parse({
+    summary: response.summary,
+    clarification: response.clarification,
+    steps: response.steps.map(step => ({
+      title: step.title,
+      purpose: step.purpose,
+      tool: {
+        toolName: step.toolName,
+        input: Object.fromEntries(Object.entries(step.arguments).filter(([name, value]) =>
+          value.trim() !== '' || (step.toolName === 'searchTasks' && name === 'query'),
+        )),
+      },
+    })),
+  });
+}
 export const runStatusSchema = z.enum(['planning', 'running', 'tool_use', 'blocked', 'needs_approval', 'paused', 'completed', 'failed', 'cancelled']);
 export type RunStatus = z.infer<typeof runStatusSchema>;
 const stepSchema = z.object({

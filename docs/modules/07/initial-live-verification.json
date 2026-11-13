@@ -1,0 +1,82 @@
+{
+  "checkedAt": "2026-11-13T01:25:43.206Z",
+  "url": "https://tasklane-agent.vercel.app",
+  "liveRequested": true,
+  "passed": false,
+  "checks": [
+    {
+      "name": "pages, session and no-store boundary",
+      "passed": true,
+      "detail": {
+        "aiConfigured": true
+      }
+    },
+    {
+      "name": "practice plan, pause, refresh and resume",
+      "passed": true
+    },
+    {
+      "name": "read-only execution and approval gate",
+      "passed": true,
+      "detail": {
+        "traceEvents": [
+          "started",
+          "plan_ready",
+          "paused",
+          "resumed",
+          "tool_started",
+          "paused",
+          "resumed",
+          "tool_completed",
+          "tool_started",
+          "tool_completed",
+          "tool_started",
+          "approval_requested",
+          "human_approved",
+          "tool_completed",
+          "completed"
+        ],
+        "toolResults": [
+          {
+            "tool": "searchKnowledge",
+            "result": "[quality-2] Release quality gate: Before launch, complete a keyboard-only journey, visible focus checks, form error checks, and loading and empty states. High-priority defects must be fixed or the release is blocked. The project lead records the final approval.\n[brief-2] Release decision: The target launch date is 24 November 2026. This is a target, not a confirmed commitment. The project lead approves the launch only after mobile review and the release quality checklist pass. An unresolved high-priority defect blocks release."
+          },
+          {
+            "tool": "searchTasks",
+            "result": "tsk-research: Customer interview synthesis — todo, medium\ntsk-onboarding: Map the onboarding flow — todo, high\ntsk-email: Draft launch announcement — todo, low\ntsk-checkout: Build checkout prototype — doing, high\ntsk-mobile: Review mobile layouts — doing, medium\ntsk-tokens: Publish design tokens — done, low"
+          },
+          {
+            "tool": "createTask",
+            "result": "Approved change committed to your isolated project board. The board offers Undo for the latest change."
+          }
+        ]
+      }
+    },
+    {
+      "name": "cancel invalidates pending proposal",
+      "passed": true
+    },
+    {
+      "name": "revision invalidates approval and clarification can be answered",
+      "passed": true
+    },
+    {
+      "name": "failure stays safe and retry can complete",
+      "passed": true
+    },
+    {
+      "name": "strict input, session isolation, consent and stale checkpoints",
+      "passed": true
+    },
+    {
+      "name": "real AI plan reaches approval and completes after human decision",
+      "passed": false,
+      "detail": "AI planning or tool validation failed. No change was committed by this request. Retry or revise the instructions.\n+ actual - expected\n\n+ 'failed'\n- 'needs_approval'\n"
+    },
+    {
+      "name": "real AI unsupported request asks clarification without tools",
+      "passed": false,
+      "detail": "AI planning or tool validation failed. No change was committed by this request. Retry or revise the instructions.\n+ actual - expected\n\n+ 'failed'\n- 'blocked'\n"
+    }
+  ]
+}
