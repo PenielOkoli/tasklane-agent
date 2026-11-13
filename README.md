@@ -5,7 +5,7 @@
 Tasklane continues as a supervised project assistant: an AI-generated plan, inspectable tool calls, approval before every board change, pause/resume/cancel checkpoints, instruction revision, clarification, failure recovery, and an exportable activity trace. Knowledge and Board remain available.
 
 - Repository: https://github.com/PenielOkoli/tasklane-agent
-- Live deployment: pending verification (see [submission](docs/modules/07/submission.md)).
+- Live deployment: https://tasklane-agent.vercel.app/
 - [Assessment mapping](docs/modules/07/assessment.md)
 - [Plan and architecture](docs/modules/07/plan.md)
 - [Verification and limitations](docs/modules/07/verification.md)
